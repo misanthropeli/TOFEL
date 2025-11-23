@@ -1,7 +1,3 @@
-
-<h2 style="font-family: monospace; color: #0052CC;">[□□□□□□□□□□□□□□□□□□□□] 0%</h2>
-
-<h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0052CC,100:009688&height=180&section=header&text=PhD%20Candidate%202027&fontSize=50&fontColor=ffffff" width="100%" alt="Header" />
@@ -33,7 +29,7 @@
 <br/>
 
 ## ✅ Daily Protocol
-> **Instructions:** Click checkboxes to check-in directly on this page.
+> **Instructions:** You can now CLICK the checkboxes below directly!
 
 ### 📅 2025-11-23 (Today)
 - [ ] **Vocab**: Memorize 100 new words + Review 150
@@ -43,6 +39,7 @@
 <br/>
 <br/>
 
+<div align="center">
 <details open>
 <summary><h3>🗺️ Strategic Master Plan</h3></summary>
 <br/>
@@ -74,7 +71,6 @@
 </table>
 </details>
 
-<div align="center">
 <br>
 <sub>Automated by <b>Supervisor Bot</b> 🤖 • <a href="./daily_schedule.json">View Config</a></sub>
 </div>
