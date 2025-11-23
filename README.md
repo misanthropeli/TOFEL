@@ -1,3 +1,7 @@
+
+<h2 style="font-family: monospace; color: #0052CC;">[□□□□□□□□□□□□□□□□□□□□] 0%</h2>
+
+<h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
 <h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
 <div align="center">
 
