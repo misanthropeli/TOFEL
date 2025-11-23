@@ -1,77 +1,38 @@
 <div align="center">
 
-<table width="100%" style="border: none;">
-  <tr style="border: none;">
-    <td align="center" width="15%" style="border: none;">
-      <img src="[https://img.shields.io/badge/PHD-2027-black?style=for-the-badge&logo=apple&logoColor=white](https://img.shields.io/badge/PHD-2027-black?style=for-the-badge&logo=apple&logoColor=white)" />
-    </td>
-    <td align="center" width="70%" style="border: none;">
-      <h2>🧪 Chemical Engineering Research Lab</h2>
-    </td>
-    <td align="center" width="15%" style="border: none;">
-      <img src="[https://img.shields.io/badge/TOEFL-100%2B-0052CC?style=for-the-badge&logo=target&logoColor=white](https://img.shields.io/badge/TOEFL-100%2B-0052CC?style=for-the-badge&logo=target&logoColor=white)" />
-    </td>
-  </tr>
-</table>
+# 🧪 Chemical Engineering PhD Lab
 
-<br/>
+![Target](https://img.shields.io/badge/TARGET-TOEFL_100%2B-blue?style=for-the-badge&logo=target)
+![Major](https://img.shields.io/badge/MAJOR-CHEMICAL_ENG-teal?style=for-the-badge&logo=atom)
+![Status](https://img.shields.io/badge/STATUS-HIGH_PRESSURE-orange?style=for-the-badge&logo=fire)
 
-<table width="100%">
-  <tr>
-    <td width="33%" align="center" valign="top">
-      <h3>⏳ Countdown</h3>
-      <h1>89</h1>
-      <p>Days Remaining</p>
-      <br/>
-      <img src="[https://img.shields.io/badge/Deadline-2026.02.20-critical?style=flat-square](https://img.shields.io/badge/Deadline-2026.02.20-critical?style=flat-square)" />
-    </td>
-    
-    <td width="33%" align="center" valign="top">
-      <h3>🔥 Current Focus</h3>
-      <img src="[https://readme-typing-svg.herokuapp.com?font=Roboto&weight=600&size=25&duration=3000&pause=1000&color=0052CC&center=true&vCenter=true&width=300&lines=Phase+1:+Foundation;Vocabulary+Accumulation;SSS+Listening+Input;No+Excuses](https://readme-typing-svg.herokuapp.com?font=Roboto&weight=600&size=25&duration=3000&pause=1000&color=0052CC&center=true&vCenter=true&width=300&lines=Phase+1:+Foundation;Vocabulary+Accumulation;SSS+Listening+Input;No+Excuses)." alt="Typing SVG" />
-      <br/><br/>
-      <img src="[https://img.shields.io/badge/Status-Active_Sprint-success?style=for-the-badge](https://img.shields.io/badge/Status-Active_Sprint-success?style=for-the-badge)" />
-    </td>
+---
 
-    <td width="33%" align="center" valign="top">
-      <h3>📊 Progress</h3>
-      <br/>
-      <img src="[https://progress-bar.dev/15/?scale=100&title=Covered&width=200&color=0052CC&suffix=](https://progress-bar.dev/15/?scale=100&title=Covered&width=200&color=0052CC&suffix=)%" alt="Progress">
-      <br/><br/>
-      <p><i>Target: Direct PhD Entry</i></p>
-    </td>
-  </tr>
-</table>
+### 🚀 距离考试 (2026.02.20) 仅剩
 
+# 89 天
+![Progress Bar](https://progress-bar.dev/15/?scale=100&title=Overall_Progress&width=600&color=0052CC&suffix=%)
 </div>
 
-<br/>
+---
 
-## ✅ Daily Protocol (Click to Check-in)
+### 📊 每日任务仪表盘 (Daily Dashboard)
 
-> **Instructions:** Don't click "Edit". Just click the checkboxes below directly on this page. Wait 2 seconds for it to update.
+| 🔥 当前阶段 (Focus) | 📅 今日任务 (Task Checklist) |
+| :--- | :--- |
+| **Phase 1: Foundation**<br>*(Now - 12.20)*<br><br>重点：<br>1. 词汇量突破 8000<br>2. SSS 听写 (适应语速)<br>3. 长难句分析 | **直接点击下方方框打卡**<br>*(系统会自动保存)*<br><br>- [ ] **单词**: 背新词 100 + 复习 150<br>- [ ] **听力**: SSS 听写 3 篇 (全对)<br>- [ ] **阅读**: TPO 长难句分析 5 句<br>- [ ] **口语**: 录音 3 遍直至流利|
 
-### 📅 2025-11-23 (Today)
-- [ ] **Vocab**: Memorize 100 new words + Review 150
-- [ ] **Listening**: Complete 3 SSS Dictations (Error < 5 words)
-- [ ] **Reading**: Analyze 5 long sentences from TPO
-- [ ] **Output**: Record Speaking Task 1 (3 takes)
-<br/>
+---
 
-<details>
-<summary>📂 <b>Click to expand: Strategic Roadmap & History</b></summary>
-<br/>
+### 🗺️ 战略路线图 (Strategic Roadmap)
 
-### 🗺️ Master Plan
-| Phase | Timeline | Core Mission | Status |
+| 阶段 | 时间 | 核心目标 | 状态 |
 | :--- | :--- | :--- | :--- |
-| **1. Input** | Now - 12.20 | Vocab (8k) + SSS Listening | 🟢 Active |
-| **2. Attack** | 12.21 - 01.31 | TPO Sets 50-70 + Speaking | ⚪ Pending |
-| **3. Sprint** | 02.01 - 02.19 | Full Mock Exams (9 AM) | ⚪ Pending |
-
-</details>
+| **1. 输入期** | 11.23 - 12.20 | 搞定单词与听力辨音 | 🟢 进行中 |
+| **2. 强攻期** | 12.21 - 01.31 | TPO 分项刷题 (50-70套) | ⚪ 等待中 |
+| **3. 冲刺期** | 02.01 - 02.19 | 全真模考 + 生物钟调节 | ⚪ 等待中 |
 
 <div align="center">
 <br>
-<sub>System automated by Python Supervisor • <a href="./daily_schedule.json">View Config</a></sub>
+<sub>Automated by Supervisor Bot 🤖</sub>
 </div>
