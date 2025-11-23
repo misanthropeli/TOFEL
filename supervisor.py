@@ -4,7 +4,7 @@ import json
 import requests
 from datetime import datetime, timezone, timedelta
 
-# --- CONFIGURATION ---
+# --- 基础配置 ---
 EXAM_DATE = datetime(2026, 2, 20)
 START_DATE = datetime(2025, 11, 23)
 README_FILE = "README.md"
@@ -12,6 +12,7 @@ FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK")
 SCHEDULE_FILE = "daily_schedule.json"
 
 def get_time_info():
+    # 获取北京时间
     utc_now = datetime.now(timezone.utc)
     beijing_now = utc_now + timedelta(hours=8)
     
@@ -19,35 +20,42 @@ def get_time_info():
     total_days = (EXAM_DATE.date() - START_DATE.date()).days
     days_passed = (beijing_now.date() - START_DATE.date()).days
     
+    # 进度计算
     if total_days <= 0: total_days = 1
     progress = int((days_passed / total_days) * 100)
     
     return beijing_now, days_left, max(0, min(100, progress))
 
+# --- 核心功能：生成字符进度条 ---
+def make_progress_bar(percent, length=20):
+    filled_length = int(length * percent // 100)
+    bar = '■' * filled_length + '□' * (length - filled_length)
+    return f"[{bar}] {percent}%"
+
 def update_readme(today_date, days_left, progress):
-    if not os.path.exists(README_FILE): return
+    if not os.path.exists(README_FILE): 
+        print(f"Error: {README_FILE} not found.")
+        return
 
     with open(README_FILE, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # 1. 更新天数 (Day Counter)
-    # 匹配 和 之间的任何内容
+    # 1. 更新倒计时 (保留你的 H1 样式)
     pattern_days = r"(\n)(.*?)(\n\s*)"
-    # 我们保留原来的样式 style="...", 只替换数字
-    # 注意：这里的替换字符串包含 HTML 样式，确保视觉效果不变
-    new_day_html = f'      <h1 style="font-size: 80px; color: #333;">{days_left} Days</h1>'
+    new_day_html = f'      <h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
     
     if re.search(pattern_days, content, re.DOTALL):
         content = re.sub(pattern_days, f"\\g<1>{new_day_html}\\g<3>", content, flags=re.DOTALL)
 
-    # 2. 更新总进度条 (Total Progress)
-    pattern_prog = r"(\n)(.*?)(\n)"
-    new_img_tag = f'<img src="https://progress-bar.dev/{progress}/?scale=100&title=Total_Preparation&width=500&color=0052CC&suffix=%25" alt="Total Progress">'
+    # 2. 更新进度条 (生成字符画)
+    pattern_prog = r"(\n)(.*?)(\n\s*)"
+    progress_str = make_progress_bar(progress)
+    new_prog_html = f'      <h2 style="font-family: monospace; color: #0052CC;">{progress_str}</h2>'
     
     if re.search(pattern_prog, content, re.DOTALL):
-        content = re.sub(pattern_prog, f"\\g<1>{new_img_tag}\\g<3>", content, flags=re.DOTALL)
+        content = re.sub(pattern_prog, f"\\g<1>{new_prog_html}\\g<3>", content, flags=re.DOTALL)
 
-    # 3. 每日打卡区重置 (Daily Checklist)
+    # 3. 每日打卡区 (如果是新的一天，重置 Checklist)
     today_str = today_date.strftime("%Y-%m-%d")
     if f"📅 {today_str}" not in content:
         new_checklist = f"""### 📅 {today_str} (Today)
@@ -65,23 +73,63 @@ def update_readme(today_date, days_left, progress):
     
     print(f"README Updated: {days_left} days left, {progress}% progress.")
 
-def send_feishu(days_left):
-    if not FEISHU_WEBHOOK: return
+def send_feishu(days_left, progress):
+    if not FEISHU_WEBHOOK:
+        print("Feishu Webhook not set.")
+        return
+    
+    # 这里的文案可以根据剩余天数自动变化
+    msg_title = "💪 保持专注 (Stay Focused)"
+    if days_left < 30:
+        msg_title = "🔥 红色警报 (Red Alert)"
     
     msg = {
-        "msg_type": "text",
-        "content": {
-            "text": f"🌊 早安！实验开始了。距离 TOEFL 考试还有 {days_left} 天。\nCheck your GitHub Dashboard now."
+        "msg_type": "interactive",
+        "card": {
+            "header": {
+                "title": {
+                    "tag": "plain_text",
+                    "content": f"PhD Countdown: {days_left} Days"
+                },
+                "template": "blue"
+            },
+            "elements": [
+                {
+                    "tag": "div",
+                    "text": {
+                        "tag": "lark_md",
+                        "content": f"**{msg_title}**\n当前进度: {progress}%\n请前往 GitHub 完成今日打卡。"
+                    }
+                },
+                {
+                    "tag": "action",
+                    "actions": [
+                        {
+                            "tag": "button",
+                            "text": {
+                                "tag": "plain_text",
+                                "content": "✅ 去打卡 / Check In"
+                            },
+                            "url": "https://github.com/misanthropeli/TOFEL", 
+                            "type": "primary"
+                        }
+                    ]
+                }
+            ]
         }
     }
+    
     try:
-        requests.post(FEISHU_WEBHOOK, json=msg)
+        response = requests.post(FEISHU_WEBHOOK, json=msg)
+        print(f"Feishu sent. Response: {response.text}")
     except Exception as e:
-        print(e)
+        print(f"Feishu error: {e}")
 
 if __name__ == "__main__":
     now, days, prog = get_time_info()
+    
+    # 1. 更新文件
     update_readme(now, days, prog)
     
-    if now.hour == 8:
-        send_feishu(days)
+    # 2. 发送消息 (不再限制时间，只要运行就发)
+    send_feishu(days, prog)
