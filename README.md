@@ -1,86 +1,76 @@
 <div align="center">
 
-<h1>🧪 Chemical Engineering PhD Candidate: 2027</h1>
+<table>
+  <tr>
+    <td align="center" width="100px">
+      <img src="https://img.shields.io/badge/PHD-2027-black?style=for-the-badge&logo=apple&logoColor=white" />
+    </td>
+    <td align="center" width="600px">
+      <h2>🧪 Chemical Engineering Research Lab</h2>
+    </td>
+    <td align="center" width="100px">
+      <img src="https://img.shields.io/badge/TOEFL-100%2B-0052CC?style=for-the-badge&logo=target&logoColor=white" />
+    </td>
+  </tr>
+</table>
 
-<p>
-  <img src="https://img.shields.io/badge/Target-TOEFL_100%2B-0052CC?style=for-the-badge&logo=target&logoColor=white" alt="Target">
-  <img src="https://img.shields.io/badge/Focus-Chemical_Engineering-009688?style=for-the-badge&logo=atom&logoColor=white" alt="Major">
-  <img src="https://img.shields.io/badge/Status-Deep_Work-FF5722?style=for-the-badge&logo=fire&logoColor=white" alt="Status">
-</p>
-
-<h3><i>"Success is the sum of small efforts, repeated day in and day out."</i></h3>
-
-<br>
+<br/>
 
 <table>
-<tr>
-<td width="600px" align="center">
-<h3>📉 Countdown to Exam</h3>
-<h2>⚠️ Remaining: <b>89</b> Days</h2>
-<br>
-<img src="https://progress-bar.dev/35/?scale=100&title=Preparation&width=500&color=0052CC&suffix=%" alt="Progress">
-<br>
-<p><i>Target Date: 2026-02-20</i></p>
-</td>
-</tr>
+  <tr>
+    <td width="33%" align="center" valign="top">
+      <h3>⏳ Countdown</h3>
+      <h1>89</h1>
+      <p>Days Remaining</p>
+      <br/>
+      <img src="https://img.shields.io/badge/Deadline-2026.02.20-critical?style=flat-square" />
+    </td>
+    
+    <td width="33%" align="center" valign="top">
+      <h3>🔥 Current Focus</h3>
+      <img src="https://readme-typing-svg.herokuapp.com?font=Roboto&weight=600&size=25&duration=3000&pause=1000&color=0052CC&center=true&vCenter=true&width=300&lines=Phase+1:+Foundation;Vocabulary+Accumulation;SSS+Listening+Input;No+Excuses." alt="Typing SVG" />
+      <br/><br/>
+      <img src="https://img.shields.io/badge/Status-Active_Sprint-success?style=for-the-badge" />
+    </td>
+
+    <td width="33%" align="center" valign="top">
+      <h3>📊 Progress</h3>
+      <br/>
+      <img src="https://progress-bar.dev/15/?scale=100&title=Covered&width=200&color=0052CC&suffix=%" alt="Progress">
+      <br/><br/>
+      <p><i>Target: Direct PhD Entry</i></p>
+    </td>
+  </tr>
 </table>
 
 </div>
 
-<br>
+<br/>
 
-## 🗺️ Strategic Roadmap
+## ✅ Daily Protocol (Click to Check-in)
 
-<table>
-  <tr>
-    <th width="33%">Phase 1: Input (Current) 🧊</th>
-    <th width="33%">Phase 2: Attack 🔥</th>
-    <th width="33%">Phase 3: Sprint 🚀</th>
-  </tr>
-  <tr>
-    <td align="center"><b>Now - 12.20</b></td>
-    <td align="center"><b>12.21 - 01.31</b></td>
-    <td align="center"><b>02.01 - 02.19</b></td>
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <li>✅ <b>Vocab:</b> 8000 Base</li>
-        <li>✅ <b>Listen:</b> SSS Dictation</li>
-        <li>✅ <b>Read:</b> Sentence Analysis</li>
-      </ul>
-    </td>
-    <td>
-      <ul>
-        <li>⬜ <b>TPO:</b> Sets 50-70</li>
-        <li>⬜ <b>Speak:</b> Logic Templates</li>
-        <li>⬜ <b>Write:</b> Speed Training</li>
-      </ul>
-    </td>
-    <td>
-      <ul>
-        <li>⬜ <b>Mock:</b> Full Exams</li>
-        <li>⬜ <b>Bio-clock:</b> 9AM Start</li>
-        <li>⬜ <b>Mindset:</b> Confidence</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+> **Instructions:** Don't click "Edit". Just click the checkboxes below directly on this page. Wait 2 seconds for it to update.
 
-<br>
+### 📅 2025-11-23 (Today)
+- [ ] **Vocab**: Memorize 100 new words + Review 150
+- [ ] **Listening**: Complete 3 SSS Dictations (Error < 5 words)
+- [ ] **Reading**: Analyze 5 long sentences from TPO
+- [ ] **Output**: Record Speaking Task 1 (3 takes)
+<br/>
 
-## 📝 Daily Lab Report
+<details>
+<summary>📂 <b>Click to expand: Strategic Roadmap & History</b></summary>
+<br/>
 
-| Date | 🧪 Vocab | 🎧 Input (SSS/Blog) | 🗣️ Output (Speak) | ✍️ Writing/TPO | 📊 Note |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Goal** | *100 New* | *3 Articles* | *3 Recordings* | *1 Section* | *Self-Reflection* |
-| 11.24 | [ ] | [ ] | [ ] | [ ] | |
-| 11.25 | [ ] | [ ] | [ ] | [ ] | |
-| 11.26 | [ ] | [ ] | [ ] | [ ] | |
-| 11.27 | [ ] | [ ] | [ ] | [ ] | |
-| 11.28 | [ ] | [ ] | [ ] | [ ] | |
+### 🗺️ Master Plan
+| Phase | Timeline | Core Mission | Status |
+| :--- | :--- | :--- | :--- |
+| **1. Input** | Now - 12.20 | Vocab (8k) + SSS Listening | 🟢 Active |
+| **2. Attack** | 12.21 - 01.31 | TPO Sets 50-70 + Speaking | ⚪ Pending |
+| **3. Sprint** | 02.01 - 02.19 | Full Mock Exams (9 AM) | ⚪ Pending |
+
+</details>
 
 <div align="center">
-<br>
-<sub>Automated by <b>Supervisor Bot</b> • <a href="./daily_schedule.json">View Schedule</a></sub>
+<sub>System automated by Python Supervisor • <a href="./daily_schedule.json">View Config</a></sub>
 </div>
