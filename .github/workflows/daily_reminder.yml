@@ -1,25 +1,43 @@
-name: PhD Discipline Bot
+name: PhD Supervisor Bot
 
 on:
   schedule:
     # 对应北京时间: 08:00, 11:00, 14:00, 17:00, 22:00
+    # UTC 时间:   00:00, 03:00, 06:00, 09:00, 14:00
     - cron: '0 0 * * *'
     - cron: '0 3 * * *'
     - cron: '0 6 * * *'
     - cron: '0 9 * * *'
     - cron: '0 14 * * *'
-  workflow_dispatch: # 允许手动测试
+  workflow_dispatch: # 允许手动点击测试
+
+permissions:
+  contents: write
 
 jobs:
-  notify:
+  run-supervisor:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - run: pip install requests
-      - name: Run Supervisor
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Supervisor Script
         env:
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
         run: python supervisor.py
+
+      - name: Commit changes
+        # 只有当 README 发生变化时才提交
+        run: |
+          git config --global user.name "PhD-Supervisor-Bot"
+          git config --global user.email "bot@noreply.github.com"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "📝 Daily Progress Update" && git push)
