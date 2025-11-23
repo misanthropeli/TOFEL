@@ -1,4 +1,4 @@
-<div align="center">
+ <div align="center">
 
 # 🧪 Chemical Engineering PhD Lab
 
@@ -6,15 +6,16 @@
 ![Major](https://img.shields.io/badge/MAJOR-CHEMICAL_ENG-teal?style=for-the-badge&logo=atom)
 ![Status](https://img.shields.io/badge/STATUS-HIGH_PRESSURE-orange?style=for-the-badge&logo=fire)
 
----
+<br/>
+<br/>
 
-### 🚀 距离考试 (2026.02.20) 仅剩
+<h3>🚀 距离考试 (2026.02.20) 仅剩</h3>
 
-# 89 天
-![Progress Bar](https://progress-bar.dev/15/?scale=100&title=Overall_Progress&width=600&color=0052CC&suffix=%)
+<h1>89 天</h1>
+<img src="https://progress-bar.dev/15/?scale=100&title=Overall_Progress&width=600&color=0052CC&suffix=%25" alt="Progress Bar">
 </div>
 
----
+<br/>
 
 ## ✅ Daily Protocol (Click to Check-in)
 
@@ -42,9 +43,5 @@
 
 <div align="center">
 <br>
-<sub>System automated by Python Supervisor • <a href="./daily_schedule.json">View Config</a></sub>
-</div>
-<div align="center">
-<br>
-<sub>Automated by Supervisor Bot 🤖</sub>
+<sub>Automated by Supervisor Bot 🤖 • <a href="./daily_schedule.json">View Config</a></sub>
 </div>
