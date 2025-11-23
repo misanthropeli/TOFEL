@@ -12,7 +12,6 @@
 <h3>🚀 距离考试 (2026.02.20) 仅剩</h3>
 
 <h1>89 天</h1>
-<img src="https://progress-bar.dev/15/?scale=100&title=Overall_Progress&width=600&color=0052CC&suffix=%25" alt="Progress Bar">
 </div>
 
 <br/>
