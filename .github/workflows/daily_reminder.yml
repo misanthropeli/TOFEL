@@ -1,0 +1,25 @@
+name: PhD Discipline Bot
+
+on:
+  schedule:
+    # 对应北京时间: 08:00, 11:00, 14:00, 17:00, 22:00
+    - cron: '0 0 * * *'
+    - cron: '0 3 * * *'
+    - cron: '0 6 * * *'
+    - cron: '0 9 * * *'
+    - cron: '0 14 * * *'
+  workflow_dispatch: # 允许手动测试
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: pip install requests
+      - name: Run Supervisor
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+        run: python supervisor.py
