@@ -10,18 +10,25 @@ START_DATE = datetime(2025, 11, 23)
 README_FILE = "README.md"
 FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK")
 SCHEDULE_FILE = "daily_schedule.json"
-REPO_URL = "https://github.com/misanthropeli/TOFEL" 
+REPO_URL = "https://github.com/misanthropeli/TOFEL"
 
-# --- 安全替换函数 ---
-def safe_replace(content, start_marker, end_marker, new_content):
-    start_idx = content.find(start_marker)
-    end_idx = content.find(end_marker)
-    if start_idx == -1 or end_idx == -1:
-        print(f"Warning: Markers {start_marker} or {end_marker} not found.")
+# --- 核心修复：绝对安全的替换逻辑 ---
+def safe_replace_section(content, start_tag, end_tag, new_content):
+    """
+    找到 start_tag 和 end_tag，替换中间的内容。
+    关键点：确保不引入多余的换行和缩进。
+    """
+    start_index = content.find(start_tag)
+    end_index = content.find(end_tag)
+    
+    if start_index == -1 or end_index == -1:
+        print(f"Warning: Tags {start_tag} or {end_tag} not found. Skipping.")
         return content
-    # 这里的关键：不添加额外的换行和缩进，紧贴着标记替换
-    prefix = content[:start_idx + len(start_marker)]
-    suffix = content[end_idx:]
+    
+    # 保留标签，替换中间
+    # 这里的 \n 是为了保证源代码可读性，但不会影响 Markdown 渲染
+    prefix = content[:start_index + len(start_tag)]
+    suffix = content[end_index:]
     return prefix + "\n" + new_content + "\n" + suffix
 
 def get_time_info():
@@ -35,8 +42,8 @@ def get_time_info():
     return beijing_now, days_left, max(0, min(100, progress))
 
 def make_progress_bar(percent, length=20):
-    filled_length = int(length * percent // 100)
-    bar = '■' * filled_length + '□' * (length - filled_length)
+    filled = int(length * percent // 100)
+    bar = '■' * filled + '□' * (length - filled)
     return f"[{bar}] {percent}%"
 
 def load_schedule():
@@ -60,38 +67,38 @@ def get_current_task_info(hour, schedule):
     return task_data.get("task", "自主复习"), task_data.get("details", "无具体要求"), random.choice(quotes)
 
 def update_readme(today_date, days_left, progress):
-    if not os.path.exists(README_FILE): 
-        print("README not found!")
-        return
+    if not os.path.exists(README_FILE): return
 
     with open(README_FILE, "r", encoding="utf-8") as f: content = f.read()
 
-    # 1. 更新倒计时 (注意：这里没有任何缩进空格！)
-    new_day_html = f'<h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
-    content = safe_replace(content, "", "", new_day_html)
+    # 1. 更新倒计时 (无缩进字符串)
+    html_day = f'<h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
+    content = safe_replace_section(content, "", "", html_day)
 
-    # 2. 更新进度条 (注意：这里没有任何缩进空格！)
-    progress_str = make_progress_bar(progress)
-    new_prog_html = f'<h2 style="font-family: monospace; color: #0052CC;">{progress_str}</h2>'
-    content = safe_replace(content, "", "", new_prog_html)
+    # 2. 更新进度条 (无缩进字符串)
+    p_str = make_progress_bar(progress)
+    html_prog = f'<h2 style="font-family: monospace; color: #0052CC;">{p_str}</h2>'
+    content = safe_replace_section(content, "", "", html_prog)
 
     # 3. 更新打卡区
     today_str = today_date.strftime("%Y-%m-%d")
     if f"📅 {today_str}" not in content:
-        new_checklist = f"""### 📅 {today_str} (Today)
+        # 注意：这里列表必须没有前置空格，否则会乱
+        new_list = f"""### 📅 {today_str} (Today)
 - [ ] **Vocab**: Memorize 100 new words + Review 150
-- [ ] **Listening**: Complete 3 SSS Dictations (Error < 5 words)
+- [ ] **Listening**: Complete 3 SSS Dictations
 - [ ] **Reading**: Analyze 5 long sentences from TPO
 - [ ] **Output**: Record Speaking Task 1 (3 takes)"""
-        content = safe_replace(content, "", "", new_checklist)
+        content = safe_replace_section(content, "", "", new_list)
 
     with open(README_FILE, "w", encoding="utf-8") as f: f.write(content)
-    print(f"README updated successfully.")
+    print("README Updated Successfully")
 
 def send_feishu(days_left, progress, title, details, quote):
     if not FEISHU_WEBHOOK: return
     color = "blue"
     if days_left < 30: color = "red"
+    
     msg = {
         "msg_type": "interactive",
         "card": {
