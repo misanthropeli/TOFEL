@@ -99,7 +99,7 @@ def send_feishu(days_left, progress, title, details, quote):
         "msg_type": "interactive",
         "card": {
             "header": {
-                "title": {"tag": "plain_text", "content": f"📅 倒计时: {days_left} 天 | 进度: {progress}%"},
+                "title": {"tag": "plain_text", "content": f"倒计时: {days_left} 天 | 进度: {progress}%"},
                 "template": color
             },
             "elements": [
@@ -107,7 +107,7 @@ def send_feishu(days_left, progress, title, details, quote):
                     "tag": "div",
                     "text": {
                         "tag": "lark_md",
-                        "content": f"**💡 监督员说：**\n{quote}\n\n---\n**🚩 当前任务 ({datetime.now().hour}:00):**\n**{title}**\n{details}"
+                        "content": f"**赵大海说：**\n{quote}\n\n---\n**当前任务 ({datetime.now().hour}:00):**\n**{title}**\n{details}"
                     }
                 },
                 {"tag": "hr"},
@@ -115,7 +115,7 @@ def send_feishu(days_left, progress, title, details, quote):
                     "tag": "action",
                     "actions": [{
                         "tag": "button",
-                        "text": {"tag": "plain_text", "content": "✅ 去 GitHub 打卡"},
+                        "text": {"tag": "plain_text", "content": "去 GitHub 打卡"},
                         "url": REPO_URL,
                         "type": "primary"
                     }]
