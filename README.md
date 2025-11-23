@@ -17,9 +17,6 @@
       <h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
       <p style="color: #586069;"><i>Target Date: 2026.02.20</i></p>
       <br>
-      
-      <h3>Total Preparation Progress</h3>
-      <h2 style="font-family: monospace; color: #0052CC;">[■■□□□□□□□□□□□□□□□□□□] 10%</h2>
       </td>
   </tr>
 </table>
