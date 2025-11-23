@@ -1,7 +1,3 @@
-<div align="center">
-
-<h2 style="font-family: monospace; color: #0052CC;">[--------------------] 0%</h2>
-
 <h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0052CC,100:009688&height=180&section=header&text=PhD%20Candidate%202027&fontSize=50&fontColor=ffffff" width="100%" alt="Header" />
