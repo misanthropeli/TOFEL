@@ -10,17 +10,19 @@
 
 <br/>
 
-<table style="border:none; background-color: transparent;">
+<table style="border: 1px solid #e1e4e8; border-radius: 6px; box-shadow: 0 1px 3px rgba(27,31,35,0.12);">
   <tr style="border:none;">
-    <td align="center" style="border:none;">
+    <td align="center" width="500px" style="border:none; padding: 20px;">
       <h3>🚀 2026 Spring Launch Countdown</h3>
-      <h1 style="font-size: 80px; color: #333; margin: 0;">89 Days</h1>
-      <p><i>Target Date: 2026.02.20</i></p>
-    </td>
+      <h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
+      <p style="color: #586069;"><i>Target Date: 2026.02.20</i></p>
+      <br>
+      <h3>Total Preparation Progress</h3>
+      <h2 style="font-family: monospace; color: #0052CC;">[■■■□□□□□□□□□□□□□□□□□] 15%</h2>
+      </td>
   </tr>
 </table>
 
-<img src="https://geps.dev/progress/15" alt="Total Progress" width="500" />
 </div>
 
 <br/>
@@ -28,7 +30,7 @@
 
 ## ✅ Daily Protocol
 
-> **Instructions:** Click checkboxes to update.
+> **Instructions:** Click checkboxes to check-in directly on this page.
 
 ### 📅 2025-11-23 (Today)
 - [ ] **Vocab**: Memorize 100 new words + Review 150
@@ -47,14 +49,14 @@
     <th width="20%">Phase</th>
     <th width="25%">Timeline</th>
     <th width="35%">Core Mission</th>
-    <th width="20%">Progress</th>
+    <th width="20%">Status</th>
   </tr>
   <tr>
     <td align="center"><b>Phase 1: Input</b><br>🧊 Foundation</td>
     <td align="center">Now - 12.20</td>
     <td>Vocab (8k) + SSS Listening</td>
     <td align="center">
-      <img src="https://geps.dev/progress/40?color=2ea44f" width="100" alt="P1">
+      <img src="https://img.shields.io/badge/STATUS-ACTIVE-success?style=flat-square" alt="Active">
     </td>
   </tr>
   <tr>
@@ -62,7 +64,7 @@
     <td align="center">12.21 - 01.31</td>
     <td>TPO Sets 50-70 + Speaking</td>
     <td align="center">
-      <img src="https://geps.dev/progress/0?color=gray" width="100" alt="P2">
+      <img src="https://img.shields.io/badge/STATUS-PENDING-lightgrey?style=flat-square" alt="Pending">
     </td>
   </tr>
   <tr>
@@ -70,7 +72,7 @@
     <td align="center">02.01 - 02.19</td>
     <td>Full Mock Exams (9 AM)</td>
     <td align="center">
-      <img src="https://geps.dev/progress/0?color=gray" width="100" alt="P3">
+      <img src="https://img.shields.io/badge/STATUS-PENDING-lightgrey?style=flat-square" alt="Pending">
     </td>
   </tr>
 </table>
