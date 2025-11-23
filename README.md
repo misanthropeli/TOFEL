@@ -51,19 +51,19 @@
 <th width="20%">Status</th>
 </tr>
 <tr>
-<td align="center"><b>Phase 1: Input</b><br>🧊 Foundation</td>
+<td align="center"><b>Phase 1: Input</b><br>Foundation</td>
 <td align="center">Now - 12.20</td>
 <td>Vocab (8k) + SSS Listening</td>
 <td align="center"><img src="https://img.shields.io/badge/STATUS-ACTIVE-success?style=flat-square" alt="Active"></td>
 </tr>
 <tr>
-<td align="center"><b>Phase 2: Attack</b><br>🔥 Intensity</td>
+<td align="center"><b>Phase 2: Attack</b><br>Intensity</td>
 <td align="center">12.21 - 01.31</td>
 <td>TPO Sets 50-70 + Speaking</td>
 <td align="center"><img src="https://img.shields.io/badge/STATUS-PENDING-lightgrey?style=flat-square" alt="Pending"></td>
 </tr>
 <tr>
-<td align="center"><b>Phase 3: Sprint</b><br>🚀 Launch</td>
+<td align="center"><b>Phase 3: Sprint</b><br>Launch</td>
 <td align="center">02.01 - 02.19</td>
 <td>Full Mock Exams (9 AM)</td>
 <td align="center"><img src="https://img.shields.io/badge/STATUS-PENDING-lightgrey?style=flat-square" alt="Pending"></td>
