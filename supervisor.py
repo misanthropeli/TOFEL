@@ -41,10 +41,7 @@ def get_time_info():
     progress = int((days_passed / total_days) * 100)
     return beijing_now, days_left, max(0, min(100, progress))
 
-def make_progress_bar(percent, length=20):
-    filled = int(length * percent // 100)
-    bar = '■' * filled + '□' * (length - filled)
-    return f"[{bar}] {percent}%"
+
 
 def load_schedule():
     if not os.path.exists(SCHEDULE_FILE): return {}
@@ -74,11 +71,6 @@ def update_readme(today_date, days_left, progress):
     # 1. 更新倒计时 (无缩进字符串)
     html_day = f'<h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
     content = safe_replace_section(content, "", "", html_day)
-
-    # 2. 更新进度条 (无缩进字符串)
-    p_str = make_progress_bar(progress)
-    html_prog = f'<h2 style="font-family: monospace; color: #0052CC;">{p_str}</h2>'
-    content = safe_replace_section(content, "", "", html_prog)
 
     # 3. 更新打卡区
     today_str = today_date.strftime("%Y-%m-%d")
