@@ -16,22 +16,34 @@
 
 ---
 
-### 📊 每日任务仪表盘 (Daily Dashboard)
+## ✅ Daily Protocol (Click to Check-in)
 
-| 🔥 当前阶段 (Focus) | 📅 今日任务 (Task Checklist) |
-| :--- | :--- |
-| **Phase 1: Foundation**<br>*(Now - 12.20)*<br><br>重点：<br>1. 词汇量突破 8000<br>2. SSS 听写 (适应语速)<br>3. 长难句分析 | **直接点击下方方框打卡**<br>*(系统会自动保存)*<br><br>- [ ] **单词**: 背新词 100 + 复习 150<br>- [ ] **听力**: SSS 听写 3 篇 (全对)<br>- [ ] **阅读**: TPO 长难句分析 5 句<br>- [ ] **口语**: 录音 3 遍直至流利|
+> **Instructions:** Don't click "Edit". Just click the checkboxes below directly on this page. Wait 2 seconds for it to update.
 
----
+### 📅 2025-11-23 (Today)
+- [ ] **Vocab**: Memorize 100 new words + Review 150
+- [ ] **Listening**: Complete 3 SSS Dictations (Error < 5 words)
+- [ ] **Reading**: Analyze 5 long sentences from TPO
+- [ ] **Output**: Record Speaking Task 1 (3 takes)
+<br/>
 
-### 🗺️ 战略路线图 (Strategic Roadmap)
+<details>
+<summary>📂 <b>Click to expand: Strategic Roadmap & History</b></summary>
+<br/>
 
-| 阶段 | 时间 | 核心目标 | 状态 |
+### 🗺️ Master Plan
+| Phase | Timeline | Core Mission | Status |
 | :--- | :--- | :--- | :--- |
-| **1. 输入期** | 11.23 - 12.20 | 搞定单词与听力辨音 | 🟢 进行中 |
-| **2. 强攻期** | 12.21 - 01.31 | TPO 分项刷题 (50-70套) | ⚪ 等待中 |
-| **3. 冲刺期** | 02.01 - 02.19 | 全真模考 + 生物钟调节 | ⚪ 等待中 |
+| **1. Input** | Now - 12.20 | Vocab (8k) + SSS Listening | 🟢 Active |
+| **2. Attack** | 12.21 - 01.31 | TPO Sets 50-70 + Speaking | ⚪ Pending |
+| **3. Sprint** | 02.01 - 02.19 | Full Mock Exams (9 AM) | ⚪ Pending |
 
+</details>
+
+<div align="center">
+<br>
+<sub>System automated by Python Supervisor • <a href="./daily_schedule.json">View Config</a></sub>
+</div>
 <div align="center">
 <br>
 <sub>Automated by Supervisor Bot 🤖</sub>
