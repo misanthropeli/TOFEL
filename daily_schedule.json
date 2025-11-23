@@ -1,22 +1,31 @@
 {
   "daily_routine": {
     "08": {
-      "task": "Morning Input",
-      "details": "Vocab 100 words + Review 150."
+      "task": "单词 (Vocabulary)",
+      "details": "1. **嗯背单词**：新词 100 个，复习 150 个。\n2. **速度要求**：每个单词停留不超过 2 秒，第一遍靠直觉。\n3. **KPI**：早饭结束前必须完成，否则不许吃午饭。"
     },
     "11": {
-      "task": "TPO Training",
-      "details": "1 Reading Section (54m) OR 1 Listening Section."
+      "task": "TPO 阅读/听力 (Input)",
+      "details": "1. **环境**：完全屏蔽手机，电脑开启飞行模式。\n2. **任务**：做 1 个完整的 Section (54分钟阅读 或 2个对话+3个讲座)。\n3. **复盘**：错题必须回到原文定位。问自己：是单词不认识？还是长难句没读懂？"
     },
     "14": {
-      "task": "Intensive Listening",
-      "details": "SSS Dictation x3 + Error Analysis."
+      "task": "精听 (Intensive Listening)",
+      "details": "1. **材料**：SSS (60-Second Science) 或 上午做错的 TPO 讲座。\n2. **听写**：一句一句听，写下来。听不懂倒回去，最多听 5 遍。\n3. **红笔修正**：对照原文，圈出连读、弱读和生词。"
     },
-    "20": {
-      "task": "Output & Review",
-      "details": "Speaking Task 1 Recording + Daily Check-in."
+    "17": {
+      "task": "口语 (Speaking)",
+      "details": "1. **Task 1**：随机抽题，录音 3 遍 (V1 原版 -> V2 纠音 -> V3 完美版)。\n2. **Task 2-4**：复述上午听过的 Lecture，强制使用连接词 (However, Therefore)。\n3. **标准**：不许有 'Uh...', 'Um...'。"
+    },
+    "22": {
+      "task": "复盘与写作 (Review)",
+      "details": "1. **写作积累**：看一篇范文，积累 2 个好句型。\n2. **数据录入**：去 GitHub 勾选今日完成的任务。\n3. **心态调整**：今天没完成的任务，明天加倍。"
     }
   },
-  "sprint_mode_trigger_days": 15, 
-  "sprint_message": "🔥 HELL WEEK MODE ON"
+  "quotes": [
+    "PhD 的路是用 TPO 铺出来的。",
+    "你现在的松懈，就是面试时的尴尬。",
+    "不要假装努力，结果不会陪你演戏。",
+    "想做 Chemical Engineering？先听懂 Lecture 里的化学反应。",
+    "痛苦是暂时的，GPA 和 Paper 是永恒的。"
+  ]
 }
