@@ -1,0 +1,26 @@
+{
+  "daily_routine": {
+    "08": {
+      "task": "⚡️ 【晨间启动】 单词斩杀",
+      "details": "打开背单词APP。\n目标：新词 100 个，复习 150 个。\nKPI：早饭结束前必须完成。"
+    },
+    "11": {
+      "task": "📖 【阅读/听力】 强输入训练",
+      "details": "打开 TOEFL100 软件。\n单数日：做 TPO 阅读 1 套 (54min)。\n双数日：做 TPO 听力 1 套。\nKPI：错题必须逐个分析原因（是词汇不懂还是逻辑不懂？）"
+    },
+    "14": {
+      "task": "🎧 【磨耳朵】 SSS 听写 (Scientific American)",
+      "details": "资源：60-Second Science (选取化学/环境类)。\n动作：\n1. 盲听写大意。\n2. 逐句听写 (Dictation)。\n3. 红笔修正连读/弱读错误。\nKPI：完成 3 篇听写。"
+    },
+    "17": {
+      "task": "🗣 【口语/复述】 拒绝哑巴英语",
+      "details": "材料：刚才听写的 SSS 或 TPO 口语题。\n动作：跟读/复述，直到嘴巴不再打结。\nKPI：录音 3 次，保留最完美的一版。"
+    },
+    "22": {
+      "task": "📝 【夜间输出】 写作与复盘",
+      "details": "单数日：积累 3 个高分句型/论点。\n双数日：限时 10 分钟写一篇学术讨论 (Academic Discussion)。\n最后：提交 GitHub Commit，点亮绿格子。"
+    }
+  },
+  "sprint_mode_trigger_days": 15, 
+  "sprint_message": "🔥 冲刺模式已启动！\n请立刻打开 TOEFL100 软件进行全套模考。\n不要暂停，不要看手机，完全模拟考试环境！"
+}
