@@ -1,5 +1,4 @@
 import os
-import re
 import json
 import random
 import requests
@@ -12,6 +11,25 @@ README_FILE = "README.md"
 FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK")
 SCHEDULE_FILE = "daily_schedule.json"
 REPO_URL = "https://github.com/misanthropeli/TOFEL" # 你的仓库链接
+
+# --- 安全替换函数 (杜绝乱码) ---
+def safe_replace(content, start_marker, end_marker, new_content):
+    """
+    只替换 start_marker 和 end_marker 中间的内容。
+    如果找不到标记，就不做任何修改。
+    """
+    start_idx = content.find(start_marker)
+    end_idx = content.find(end_marker)
+    
+    if start_idx == -1 or end_idx == -1:
+        print(f"Warning: Markers {start_marker} or {end_marker} not found.")
+        return content
+    
+    # 保留标记本身，只替换中间
+    prefix = content[:start_idx + len(start_marker)]
+    suffix = content[end_idx:]
+    
+    return prefix + "\n" + new_content + "\n" + suffix
 
 def get_time_info():
     utc_now = datetime.now(timezone.utc)
@@ -35,12 +53,10 @@ def load_schedule():
     if not os.path.exists(SCHEDULE_FILE): return {}
     with open(SCHEDULE_FILE, 'r', encoding='utf-8') as f: return json.load(f)
 
-# 获取当前时间段的任务
 def get_current_task_info(hour, schedule):
     routine = schedule.get("daily_routine", {})
     quotes = schedule.get("quotes", ["Go study!"])
     
-    # 找到最近的一个时间点
     target_key = "08"
     min_diff = 24
     for key in routine.keys():
@@ -56,37 +72,34 @@ def get_current_task_info(hour, schedule):
     return task_data.get("task", "自主复习"), task_data.get("details", "无具体要求"), random.choice(quotes)
 
 def update_readme(today_date, days_left, progress):
-    if not os.path.exists(README_FILE): return
+    if not os.path.exists(README_FILE): 
+        print("README not found!")
+        return
 
     with open(README_FILE, "r", encoding="utf-8") as f: content = f.read()
 
-    # 1. 精准更新倒计时 (只替换数字部分，保留样式)
-    # 使用 strict regex 确保只匹配到我们要的地方
-    pattern_days = r"(\n)(.*?)(\n\s*)"
+    # 1. 更新倒计时
     new_day_html = f'      <h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
-    if re.search(pattern_days, content, re.DOTALL):
-        content = re.sub(pattern_days, f"\\g<1>{new_day_html}\\g<3>", content, flags=re.DOTALL)
+    content = safe_replace(content, "", "", new_day_html)
 
-    # 2. 精准更新进度条
-    pattern_prog = r"(\n)(.*?)(\n\s*)"
+    # 2. 更新进度条
     progress_str = make_progress_bar(progress)
     new_prog_html = f'      <h2 style="font-family: monospace; color: #0052CC;">{progress_str}</h2>'
-    if re.search(pattern_prog, content, re.DOTALL):
-        content = re.sub(pattern_prog, f"\\g<1>{new_prog_html}\\g<3>", content, flags=re.DOTALL)
+    content = safe_replace(content, "", "", new_prog_html)
 
-    # 3. 每日打卡区
+    # 3. 更新打卡区
     today_str = today_date.strftime("%Y-%m-%d")
+    # 只有当日期标题不是今天时，才生成新的
     if f"📅 {today_str}" not in content:
         new_checklist = f"""### 📅 {today_str} (Today)
 - [ ] **Vocab**: Memorize 100 new words + Review 150
 - [ ] **Listening**: Complete 3 SSS Dictations (Error < 5 words)
 - [ ] **Reading**: Analyze 5 long sentences from TPO
 - [ ] **Output**: Record Speaking Task 1 (3 takes)"""
-        pattern_check = r"(\n)(.*?)(\n)"
-        if re.search(pattern_check, content, re.DOTALL):
-            content = re.sub(pattern_check, f"\\g<1>{new_checklist}\\g<3>", content, flags=re.DOTALL)
+        content = safe_replace(content, "", "", new_checklist)
 
     with open(README_FILE, "w", encoding="utf-8") as f: f.write(content)
+    print(f"README updated successfully.")
 
 def send_feishu(days_left, progress, title, details, quote):
     if not FEISHU_WEBHOOK: return
@@ -94,7 +107,6 @@ def send_feishu(days_left, progress, title, details, quote):
     color = "blue"
     if days_left < 30: color = "red"
     
-    # 构造更详细的消息卡片
     msg = {
         "msg_type": "interactive",
         "card": {
@@ -134,8 +146,6 @@ if __name__ == "__main__":
     # 1. 更新文件
     update_readme(now, days, prog)
     
-    # 2. 获取任务详情
+    # 2. 发送消息
     title, details, quote = get_current_task_info(now.hour, schedule)
-    
-    # 3. 发送详细消息
     send_feishu(days, prog, title, details, quote)
