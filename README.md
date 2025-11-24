@@ -20,40 +20,31 @@
 
 本人在此立誓：
 
-1.  **拒绝借口**：无论实验多忙，每天必须完成 3 篇 SSS 听写。
-2.  **量化产出**：
-    - **Listening:** 必须做到听写全对，红笔订正。
-    - **Speaking:** 每一题录音 3 遍，保留完美版。
-    - **Reading:** 每天拆解 5 个长难句。
-3.  **Green Grid**: GitHub 的绿格子如果断了，就是我对科研不忠诚。
+1.  **听力死命令**：每天完成 **SSS (Scientific American)** 听写。听不懂的词必须用**红笔**在原文圈出，并抄写在生词本上。
+2.  **口语不哑巴**：TPO 口语题或 SSS 复述，必须录音 **3遍** (V1初版 -> V2纠音 -> V3完美版)。
+3.  **阅读不偷懒**：看不懂的长难句，必须拆解主谓宾。
 
 ---
 
-## 📅 Daily Torture Log (每日处刑记录)
+## 📅 Daily Torture Log (本周处刑记录)
 
-| Date | 单词 (Vocab 100+) | 听力 (SSS Dictation) | 阅读 (TPO Analysis) | 口语/写作 (Output) | 状态/借口 (Status/Excuses) |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **示例** | ✅ Done | ✅ 3篇 (Err: 5) | ✅ 5句长难句 | ✅ 口语 T1 (V3版) | *今天效率很高，奖励自己看一篇文献* |
-| 11.24 | [ ] | [ ] | [ ] | [ ] | |
-| 11.25 | [ ] | [ ] | [ ] | [ ] | |
-| 11.26 | [ ] | [ ] | [ ] | [ ] | |
-| ... | | | | | |
-
----
-
-## 📂 仓库结构 (Repository Structure)
-
-- `/Vocabulary`: 存放生词本 (Markdown/CSV)，重点记录听力中的生词。
-- `/Listening_SSS`: **核心文件夹**。每天上传你的 SSS 听写照片或文本（带红笔订正痕迹）。
-- `/Speaking_Demo`: 存放你觉得满意的口语录音链接。
-- `/Writing_Samples`: 存放 TPO 独立写作/学术讨论写作练习。
-- `/Mistakes_Collection`: **错题集**。TPO 阅读逻辑错误分析。
+| Date | ☀️ 晨间: 单词 (Vocab) | 🌤 午间: 强输入 (Input) | 🌇 晚间: 强输出 (Output) | 🌙 睡前: 复盘 (Review) |
+| :--- | :--- | :--- | :--- | :--- |
+| **11.24 (Sun)** | [ ] 新词100 + 复习 | [ ] TPO **听力** 1套 (1h)<br>[ ] SSS 听写 3篇 | [ ] 学术讨论写作 (10min)<br>[ ] SSS 跟读录音 | [ ] 整理听力生词<br>[ ] GitHub打卡 |
+| **11.25 (Mon)** | [ ] 新词100 + 复习 | [ ] TPO **阅读** 1套 (54min)<br>[ ] SSS 听写 3篇 | [ ] 口语 Task 1 (录3遍)<br>[ ] 积累3个写作句型 | [ ] 分析阅读长难句<br>[ ] GitHub打卡 |
+| **11.26 (Tue)** | [ ] 新词100 + 复习 | [ ] TPO **听力** 1套 (1h)<br>[ ] SSS 听写 3篇 | [ ] 学术讨论写作 (10min)<br>[ ] SSS 跟读录音 | [ ] 整理听力生词<br>[ ] GitHub打卡 |
+| **11.27 (Wed)** | [ ] 新词100 + 复习 | [ ] TPO **阅读** 1套 (54min)<br>[ ] SSS 听写 3篇 | [ ] 口语 Task 1 (录3遍)<br>[ ] 积累3个写作句型 | [ ] 分析阅读长难句<br>[ ] GitHub打卡 |
+| **11.28 (Thu)** | [ ] 新词100 + 复习 | [ ] TPO **听力** 1套 (1h)<br>[ ] SSS 听写 3篇 | [ ] 学术讨论写作 (10min)<br>[ ] SSS 跟读录音 | [ ] 整理听力生词<br>[ ] GitHub打卡 |
+| **11.29 (Fri)** | [ ] 新词100 + 复习 | [ ] TPO **阅读** 1套 (54min)<br>[ ] SSS 听写 3篇 | [ ] 口语 Task 1 (录3遍)<br>[ ] 积累3个写作句型 | [ ] 分析阅读长难句<br>[ ] GitHub打卡 |
+| **11.30 (Sat)** | [ ] 复习本周生词 | [ ] **全真模考 (Reading + Listening)** | [ ] **全真模考 (Speaking + Writing)** | [ ] **深度分析错题** |
 
 ---
 
-## 📉 Shame Wall (耻辱柱)
+## 📂 学习资料库
 
-*如果某天没有完成任务，必须在这里记录，并用英文写下不少于 50 字的自我反省。*
-
-- **2025.11.XX**: I failed to finish the SSS dictation today because I was lazy. This behavior is unacceptable for a PhD candidate. I will do double work tomorrow.
+- `/Vocabulary`: 存放生词本 (Markdown/CSV)。
+- `/Listening_SSS`: 存放 SSS 听写的文本和红笔订正照片。
+- `/Speaking_Demo`: 存放满意的口语录音链接。
+- `/Writing_Samples`: 存放写作练习 (Grammarly 修改版)。
+- `/Mistakes_Collection`: **错题集** (阅读逻辑/听力盲区)。
 
