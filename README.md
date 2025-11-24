@@ -1,4 +1,12 @@
 
+### 📅 2025-11-24 (Today)
+- [ ] **Vocab**: Memorize 100 new words + Review 150
+- [ ] **Listening**: Complete 3 SSS Dictations
+- [ ] **Reading**: Analyze 5 long sentences from TPO
+- [ ] **Output**: Record Speaking Task 1 (3 takes)
+
+<h1 style="font-size: 80px; color: #333; margin: 10px 0;">88 Days</h1>
+
 <h1 style="font-size: 80px; color: #333; margin: 10px 0;">89 Days</h1>
 <div align="center">
 
