@@ -29,17 +29,15 @@ def get_nagging_msg(hour, days_left):
     """
     监督员的灵魂：根据时间段和剩余天数生成“毒鸡汤”
     """
-    # 1. 如果进入最后 30 天冲刺期，语气变严厉
+    # 1. 语气前缀
     if days_left < 30:
-        # 地狱模式也加个换行，保持格式统一
-        prefix = "🔥 [地狱模式] \n"
+        prefix = "👹 **地狱模式**"
     else:
-        # 【修改点】换行符 \n 必须放在引号里面
-        prefix = "赵大海：\n"
+        prefix = "😘 **赵大海**"
 
     # 2. 根据时间段生成文案
     if 6 <= hour < 9:
-        msg = "早安！当你还在赖床时，你的竞争对手已经背完 List 5 了。"
+        msg = "早安，当你还在赖床时，你的竞争对手已经背完 List 5 了。"
     elif 9 <= hour < 11:
         msg = "黄金上午，如果现在还在刷手机，你是在亲手埋葬你的 PhD Offer。"
     elif 11 <= hour < 13:
@@ -55,7 +53,7 @@ def get_nagging_msg(hour, days_left):
     else: # 0点到6点
         msg = "熬夜并不能感动教授，只会让你明天的听力反应变慢。去睡觉！"
     
-    return prefix + msg
+    return prefix, msg
 
 def send_feishu():
     if not FEISHU_WEBHOOK:
@@ -82,8 +80,8 @@ def send_feishu():
     title = task_info.get("task", "自由复习/休息") if task_info else "自由复习"
     details = task_info.get("details", "保持专注，积少成多。") if task_info else "查看你的学习清单。"
 
-    # 3. 获取毒舌文案
-    nagging_text = get_nagging_msg(bj_now.hour, days_left)
+    # 3. 获取毒舌文案 (拆分为名字和内容)
+    nagging_name, nagging_text = get_nagging_msg(bj_now.hour, days_left)
 
     # 4. 颜色与标题逻辑
     if days_left < 15:
@@ -96,7 +94,7 @@ def send_feishu():
         color = "blue" # 蓝色
         header_title = f"备考倒计时: {days_left} 天"
 
-    # 5. 发送
+    # 5. 构建美化后的卡片
     time_str = bj_now.strftime("%Y-%m-%d %H:%M")
     
     data = {
@@ -111,16 +109,31 @@ def send_feishu():
                     "tag": "div",
                     "text": {
                         "tag": "lark_md", 
-                        # 这里的 \n 会被 Markdown 解析为换行，配合加粗语法 **
-                        "content": f"**当前时间:** {time_str}\n**{nagging_text}**\n---\n**当前任务：{title}**\n{details}"
+                        "content": f"{time_str}"
                     }
                 },
                 {
-                    "tag": "hr"
+                    "tag": "div",
+                    "text": {
+                        "tag": "lark_md",
+                        # 使用引用块 (>) 让赵大海的话更突出
+                        "content": f"{nagging_name} 说：\n> {nagging_text}"
+                    }
+                },
+                {
+                    "tag": "hr" # 分割线
+                },
+                {
+                    "tag": "div",
+                    "text": {
+                        "tag": "lark_md", 
+                        # 任务标题加粗，具体内容换行显示
+                        "content": f"**📋 当前任务：{title}**\n{details}"
+                    }
                 },
                 {
                     "tag": "note",
-                    "elements": [{"tag": "plain_text", "content": "Goal: Chemical Engineering PhD 2027"}]
+                    "elements": [{"tag": "plain_text", "content": "🎯 Goal: Chemical Engineering PhD 2027"}]
                 }
             ]
         }
@@ -128,7 +141,7 @@ def send_feishu():
     
     try:
         requests.post(FEISHU_WEBHOOK, json=data)
-        print("✅ Feishu notification sent with supervisor comments.")
+        print("✅ Feishu notification sent (Beautified).")
     except Exception as e:
         print(f"❌ Failed: {e}")
 
