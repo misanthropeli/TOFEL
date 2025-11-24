@@ -112,7 +112,7 @@ def send_feishu():
                     "text": {
                         "tag": "lark_md", 
                         # 这里的 \n 会被 Markdown 解析为换行，配合加粗语法 **
-                        "content": f"**当前时间:** {time_str}\n\n**{nagging_text}**\n\n---\n**当前任务：{title}**\n{details}"
+                        "content": f"**当前时间:** {time_str}\n**{nagging_text}**\n---\n**当前任务：{title}**\n{details}"
                     }
                 },
                 {
