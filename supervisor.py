@@ -11,14 +11,12 @@ SCHEDULE_FILE = "daily_schedule.json"
 # --- 核心功能 ---
 
 def get_beijing_time():
-    # 获取精准的北京时间
+    # 获取精准的北京时间 (UTC+8)
     utc_now = datetime.now(timezone.utc)
     return utc_now.astimezone(timezone(timedelta(hours=8)))
 
 def load_schedule():
-    # 读取同目录下的 json 计划表
     if not os.path.exists(SCHEDULE_FILE):
-        print(f"⚠️ Warning: {SCHEDULE_FILE} not found.")
         return {}
     try:
         with open(SCHEDULE_FILE, 'r', encoding='utf-8') as f:
@@ -27,9 +25,39 @@ def load_schedule():
         print(f"⚠️ Error reading JSON: {e}")
         return {}
 
+def get_nagging_msg(hour, days_left):
+    """
+    监督员的灵魂：根据时间段和剩余天数生成“毒鸡汤”
+    """
+    # 1. 如果进入最后 30 天冲刺期，语气变严厉
+    if days_left < 30:
+        prefix = "🔥 [地狱模式] "
+    else:
+        prefix = "💬 "
+
+    # 2. 根据时间段生成文案
+    if 6 <= hour < 9:
+        msg = "早安！当你还在赖床时，你的竞争对手已经背完 List 5 了。"
+    elif 9 <= hour < 11:
+        msg = "黄金上午。如果现在还在刷手机，你是在亲手埋葬你的 PhD Offer。"
+    elif 11 <= hour < 13:
+        msg = "午饭吃得太饱会变笨。听力做完了吗？错题分析了吗？"
+    elif 13 <= hour < 16:
+        msg = "下午容易犯困？那是借口。用冷水洗把脸，SSS 听写搞起来！"
+    elif 16 <= hour < 19:
+        msg = "傍晚是口语最好的练习时间。张开嘴！别做哑巴科学家！"
+    elif 19 <= hour < 22:
+        msg = "晚上的时间决定了你和别人的差距。再坚持一下，把今天的任务清零。"
+    elif 22 <= hour < 24:
+        msg = "很晚了。如果你今天任务都完成了，就去睡个好觉；如果没有，请在愧疚中入睡。"
+    else: # 0点到6点
+        msg = "熬夜并不能感动教授，只会让你明天的听力反应变慢。去睡觉！"
+    
+    return prefix + msg
+
 def send_feishu():
     if not FEISHU_WEBHOOK:
-        print("❌ Error: FEISHU_WEBHOOK not set in Secrets.")
+        print("❌ Error: FEISHU_WEBHOOK not set.")
         return
 
     # 1. 准备数据
@@ -37,14 +65,13 @@ def send_feishu():
     days_left = (EXAM_DATE.date() - bj_now.date()).days
     schedule = load_schedule()
     
-    # 2. 获取当前任务文案
+    # 2. 获取任务
     hour_str = f"{bj_now.hour:02d}"
     routine = schedule.get("daily_routine", {})
-    
-    # 简单的任务查找逻辑
     task_info = routine.get(hour_str)
+    
+    # 智能回溯任务逻辑
     if not task_info:
-        # 如果当前整点没任务，找最近的一个
         for h in ["22", "17", "14", "11", "08"]:
             if bj_now.hour >= int(h):
                 task_info = routine.get(h)
@@ -53,19 +80,23 @@ def send_feishu():
     title = task_info.get("task", "自由复习/休息") if task_info else "自由复习"
     details = task_info.get("details", "保持专注，积少成多。") if task_info else "查看你的学习清单。"
 
-    # 3. 颜色与标题逻辑
+    # 3. 获取毒舌文案
+    nagging_text = get_nagging_msg(bj_now.hour, days_left)
+
+    # 4. 颜色与标题逻辑
     if days_left < 15:
-        color = "carmine"
-        header_title = f"💀 仅剩 {days_left} 天 | 红色警报"
+        color = "carmine" # 红色
+        header_title = f"仅剩 {days_left} 天 | 红色警报"
     elif days_left < 60:
-        color = "orange"
-        header_title = f"⚠️ 还有 {days_left} 天 | 保持紧迫"
+        color = "orange" # 橙色
+        header_title = f"还有 {days_left} 天 | 保持紧迫"
     else:
-        color = "blue"
+        color = "blue" # 蓝色
         header_title = f"备考倒计时: {days_left} 天"
 
-    # 4. 发送请求
+    # 5. 发送
     time_str = bj_now.strftime("%Y-%m-%d %H:%M")
+    
     data = {
         "msg_type": "interactive",
         "card": {
@@ -78,7 +109,7 @@ def send_feishu():
                     "tag": "div",
                     "text": {
                         "tag": "lark_md", 
-                        "content": f"🕒 **北京时间:** {time_str}\n\n**当前任务：{title}**\n{details}"
+                        "content": f"🕒 **时间:** {time_str}\n**{nagging_text}**\n\n---\n**当前任务：{title}**\n{details}"
                     }
                 },
                 {
@@ -93,12 +124,10 @@ def send_feishu():
     }
     
     try:
-        response = requests.post(FEISHU_WEBHOOK, json=data)
-        print(f"✅ Feishu sent. Status: {response.status_code}")
+        requests.post(FEISHU_WEBHOOK, json=data)
+        print("✅ Feishu notification sent with supervisor comments.")
     except Exception as e:
-        print(f"❌ Failed to send Feishu: {e}")
+        print(f"❌ Failed: {e}")
 
 if __name__ == "__main__":
-    print("🚀 Supervisor Bot Starting...")
     send_feishu()
-    print("🏁 Done.")
