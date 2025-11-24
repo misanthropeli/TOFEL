@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 
 # --- 配置区域 ---
 EXAM_DATE = datetime(2026, 2, 20)
-REPO_URL = "https://github.com/"  # 记得换成你自己的仓库地址
+REPO_URL = "https://github.com/misanthropeli/TOFEL"  # 记得换成你自己的仓库地址
 FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK")
 SCHEDULE_FILE = "daily_schedule.json"
 README_FILE = "README.md"
