@@ -33,7 +33,7 @@ def get_nagging_msg(hour, days_left):
     if days_left < 30:
         prefix = "🔥 [地狱模式] "
     else:
-        prefix = "赵大海："
+        prefix = "赵大海："\n
 
     # 2. 根据时间段生成文案
     if 6 <= hour < 9:
@@ -109,7 +109,7 @@ def send_feishu():
                     "tag": "div",
                     "text": {
                         "tag": "lark_md", 
-                        "content": f"**时间:** {time_str}\n**{nagging_text}**\n\n---\n**当前任务：{title}**\n{details}"
+                        "content": f"**当前时间:** {time_str}\n**{nagging_text}**\n\n---\n**当前任务：{title}**\n{details}"
                     }
                 },
                 {
