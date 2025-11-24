@@ -1,117 +1,129 @@
 import os
 import json
-import random
 import requests
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 
-# --- 基础配置 ---
+# --- 配置区域 ---
 EXAM_DATE = datetime(2026, 2, 20)
-START_DATE = datetime(2025, 11, 23)
-README_FILE = "README.md"
+# 将此处替换为你的 GitHub 仓库链接
+REPO_URL = "https://github.com/" 
 FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK")
 SCHEDULE_FILE = "daily_schedule.json"
-REPO_URL = "https://github.com/misanthropeli/TOFEL"
 
-# --- 核心修复：绝对安全的替换逻辑 ---
-def safe_replace_section(content, start_tag, end_tag, new_content):
-    """
-    找到 start_tag 和 end_tag，替换中间的内容。
-    关键点：确保不引入多余的换行和缩进。
-    """
-    start_index = content.find(start_tag)
-    end_index = content.find(end_tag)
-    
-    if start_index == -1 or end_index == -1:
-        print(f"Warning: Tags {start_tag} or {end_tag} not found. Skipping.")
-        return content
-    
-    # 保留标签，替换中间
-    # 这里的 \n 是为了保证源代码可读性，但不会影响 Markdown 渲染
-    prefix = content[:start_index + len(start_tag)]
-    suffix = content[end_index:]
-    return prefix + "\n" + new_content + "\n" + suffix
-
-def get_time_info():
+def get_beijing_time():
+    # 强制使用 UTC 时间并加上 8 小时偏移量，确保不受服务器本地时区影响
     utc_now = datetime.now(timezone.utc)
-    beijing_now = utc_now + timedelta(hours=8)
+    beijing_now = utc_now.astimezone(timezone(timedelta(hours=8)))
+    return beijing_now
+
+def get_time_info(beijing_now):
     days_left = (EXAM_DATE.date() - beijing_now.date()).days
-    total_days = (EXAM_DATE.date() - START_DATE.date()).days
-    days_passed = (beijing_now.date() - START_DATE.date()).days
-    if total_days <= 0: total_days = 1
-    progress = int((days_passed / total_days) * 100)
-    return beijing_now, days_left, max(0, min(100, progress))
-
-
+    return days_left
 
 def load_schedule():
-    if not os.path.exists(SCHEDULE_FILE): return {}
-    with open(SCHEDULE_FILE, 'r', encoding='utf-8') as f: return json.load(f)
+    if not os.path.exists(SCHEDULE_FILE):
+        return {}
+    with open(SCHEDULE_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
 
-def get_current_task_info(hour, schedule):
+def get_current_task(hour, days_left, schedule):
+    # 1. 检查是否进入最后冲刺期 (最后15天)
+    sprint_days = schedule.get("sprint_mode_trigger_days", 15)
+    if days_left <= sprint_days:
+        return "🚨 考前地狱冲刺", schedule.get("sprint_message", "模考！模考！模考！")
+
+    # 2. 获取常规日程
     routine = schedule.get("daily_routine", {})
-    quotes = schedule.get("quotes", ["Go study!"])
-    target_key = "08"
-    min_diff = 24
-    for key in routine.keys():
-        try:
-            task_hour = int(key)
-            diff = hour - task_hour
-            if 0 <= diff < min_diff:
-                min_diff = diff
-                target_key = key
-        except: continue
-    task_data = routine.get(target_key, {})
-    return task_data.get("task", "自主复习"), task_data.get("details", "无具体要求"), random.choice(quotes)
-
-def update_readme(today_date, days_left, progress):
-    if not os.path.exists(README_FILE): return
-
-    with open(README_FILE, "r", encoding="utf-8") as f: content = f.read()
-
-    # 1. 更新倒计时 (无缩进字符串)
-    html_day = f'<h1 style="font-size: 80px; color: #333; margin: 10px 0;">{days_left} Days</h1>'
-    content = safe_replace_section(content, "", "", html_day)
-
-    # 3. 更新打卡区
-    today_str = today_date.strftime("%Y-%m-%d")
-    if f"📅 {today_str}" not in content:
-        # 注意：这里列表必须没有前置空格，否则会乱
-        new_list = f"""### 📅 {today_str} (Today)
-- [ ] **Vocab**: Memorize 100 new words + Review 150
-- [ ] **Listening**: Complete 3 SSS Dictations
-- [ ] **Reading**: Analyze 5 long sentences from TPO
-- [ ] **Output**: Record Speaking Task 1 (3 takes)"""
-        content = safe_replace_section(content, "", "", new_list)
-
-    with open(README_FILE, "w", encoding="utf-8") as f: f.write(content)
-    print("README Updated Successfully")
-
-def send_feishu(days_left, progress, title, details, quote):
-    if not FEISHU_WEBHOOK: return
-    color = "blue"
-    if days_left < 30: color = "red"
+    # 格式化小时，例如 9 点变成 "09"
+    hour_str = f"{hour:02d}"
     
-    msg = {
+    # 查找任务逻辑：
+    # 如果当前小时有特定任务，直接返回。
+    # 如果没有（比如9点没有任务，但8点有），则寻找最近的一个“过去的任务”。
+    task_info = routine.get(hour_str)
+    
+    if not task_info:
+        # 获取所有时间点并排序 ["08", "11", "14", "17", "22"]
+        sorted_keys = sorted(routine.keys())
+        found_key = None
+        # 倒序遍历，找到第一个小于等于当前小时的时间点
+        for k in reversed(sorted_keys):
+            if int(k) <= hour:
+                found_key = k
+                break
+        
+        if found_key:
+            task_info = routine[found_key]
+
+    if task_info:
+        return task_info.get("task"), task_info.get("details")
+    else:
+        return "💤 休息/自由复习", "保持清醒，准备下一个 Time Block。"
+
+def get_nagging_msg(hour):
+    # 根据北京时间的小时数返回不同的唠叨
+    if 0 <= hour < 6:
+        return "熬夜伤神，快去睡觉！听力需要清醒的脑子。"
+    elif 6 <= hour < 10:
+        return "☀️ 早安！新的一天，从背单词开始。"
+    elif 10 <= hour < 13:
+        return "🍽 午饭前的时间最宝贵，别刷手机了。"
+    elif 13 <= hour < 16:
+        return "☕ 下午容易犯困？站起来做精听！"
+    elif 16 <= hour < 20:
+        return "🌇 晚饭后的黄金时间，留给口语和写作。"
+    elif 20 <= hour < 24:
+        return "🌙 睡前复盘，Green Grid 点亮了吗？"
+    else:
+        return "加油！"
+
+def send_feishu(beijing_now, title, content, days_left):
+    if not FEISHU_WEBHOOK:
+        print("No Webhook found.")
+        return
+
+    # 颜色逻辑
+    if days_left < 15:
+        color = "carmine" 
+        header_title = f"💀 仅剩 {days_left} 天 | 冲刺警报"
+    elif days_left < 60:
+        color = "orange"
+        header_title = f"⚠️ 还有 {days_left} 天 | 紧迫感呢？"
+    else:
+        color = "blue"
+        header_title = f"备考倒计时: {days_left} 天"
+
+    # 获取当前时间字符串，用于调试
+    time_str = beijing_now.strftime("%Y-%m-%d %H:%M")
+    nagging = get_nagging_msg(beijing_now.hour)
+
+    data = {
         "msg_type": "interactive",
         "card": {
             "header": {
-                "title": {"tag": "plain_text", "content": f"倒计时: {days_left} 天 | 进度: {progress}%"},
+                "title": {"tag": "plain_text", "content": header_title},
                 "template": color
             },
             "elements": [
                 {
                     "tag": "div",
                     "text": {
-                        "tag": "lark_md",
-                        "content": f"**赵大海说：**\n{quote}\n\n---\n**当前任务 ({datetime.now().hour}:00):**\n**{title}**\n{details}"
+                        "tag": "lark_md", 
+                        "content": f" **当前时间 (BJ):** {time_str}\n **赵大海:** {nagging}\n\n---\n**当前任务：{title}**\n{content}"
                     }
                 },
-                {"tag": "hr"},
+                {
+                    "tag": "hr"
+                },
+                {
+                    "tag": "note",
+                    "elements": [{"tag": "plain_text", "content": "Chemical Engineering PhD 2027 | No Excuses."}]
+                },
                 {
                     "tag": "action",
                     "actions": [{
                         "tag": "button",
-                        "text": {"tag": "plain_text", "content": "去 GitHub 打卡"},
+                        "text": {"tag": "plain_text", "content": "✅ 去 GitHub 打卡"},
                         "url": REPO_URL,
                         "type": "primary"
                     }]
@@ -119,13 +131,25 @@ def send_feishu(days_left, progress, title, details, quote):
             ]
         }
     }
+    
     try:
-        requests.post(FEISHU_WEBHOOK, json=msg)
-    except Exception as e: print(e)
+        requests.post(FEISHU_WEBHOOK, json=data)
+        print(f"Sent notification at {time_str}")
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
-    now, days, prog = get_time_info()
+    # 1. 获取精准的北京时间
+    bj_now = get_beijing_time()
+    
+    # 2. 计算天数
+    days_left = get_time_info(bj_now)
+    
+    # 3. 加载计划
     schedule = load_schedule()
-    update_readme(now, days, prog)
-    title, details, quote = get_current_task_info(now.hour, schedule)
-    send_feishu(days, prog, title, details, quote)
+    
+    # 4. 获取当前小时的任务
+    task_title, task_details = get_current_task(bj_now.hour, days_left, schedule)
+    
+    # 5. 发送消息
+    send_feishu(bj_now, task_title, task_details, days_left)
